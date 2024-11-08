@@ -48,7 +48,7 @@ contract VaultExploiter is Test {
 
         vault.openWithdraw();
 
-        // trigger receive to attack
+        // trigger receive() to attack
         start_attack = true;
         vault.deposite{ value: 0.01 ether }();
 

@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 contract VaultLogic {
-    address public owner;
-    bytes32 private password;
+    address public owner; // slot 0
+    bytes32 private password; // slot 1
 
     constructor(bytes32 _password) public {
         owner = msg.sender;
@@ -20,10 +20,10 @@ contract VaultLogic {
 }
 
 contract Vault {
-    address public owner;
-    VaultLogic logic;
-    mapping(address => uint256) deposites;
-    bool public canWithdraw = false;
+    address public owner; // slot 0
+    VaultLogic logic; // slot 1
+    mapping(address => uint256) deposites; // slot 2
+    bool public canWithdraw = false; // slot 3
 
     constructor(address _logicAddress) public {
         logic = VaultLogic(_logicAddress);
